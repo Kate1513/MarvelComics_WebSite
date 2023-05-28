@@ -1,7 +1,8 @@
-import "style.css";
+import React from 'react'
+import './style.css'
 
 function App() {
-  return <></>;
+  return <></>
 }
 
-export { App };
+export { App }
