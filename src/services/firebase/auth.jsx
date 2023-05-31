@@ -1,6 +1,6 @@
 import React from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { setDoc, doc, getDoc } from 'firebase/firestore'
+import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { auth, db } from './firebase'
 import { useNavigate } from 'react-router-dom'
 import { PropTypes } from 'prop-types'
@@ -12,16 +12,15 @@ function AuthProvider({ children }) {
   const [loggedUser, setLoggedUser] = React.useState(null)
 
   // Create user with email and password
-  const signUpUser = (email, password, nickname, idNumber) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setLoggedUser(userCredential)
-        registerDocUser(userCredential.user.uid, nickname, idNumber)
-        navigate('/home')
-      })
-      .catch(() => {
-        throw new Error()
-      })
+  const signUpUser = async (email, password, nickname, idNumber) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+      setLoggedUser(userCredential)
+      registerDocUser(userCredential.user.uid, nickname, idNumber)
+      navigate('/home')
+    } catch {
+      throw new Error()
+    }
   }
 
   // Create User Document in Firestore.
@@ -34,18 +33,17 @@ function AuthProvider({ children }) {
   }
 
   // Login with email and password
-  const loginUser = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const userData = getUserData(userCredential.user.uid)
-        const data = { ...userCredential, ...userData }
-        setLoggedUser(data)
-        window.sessionStorage.setItem('user', JSON.stringify(data))
-        navigate('/home')
-      })
-      .catch(() => {
-        throw new Error('No existe el usuario')
-      })
+  const loginUser = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      const userData = await getUserData(userCredential.user.uid)
+      const data = { ...userCredential, ...userData }
+      setLoggedUser(data)
+      window.sessionStorage.setItem('user', JSON.stringify(data))
+      navigate('/home')
+    } catch {
+      throw new Error('No existe el usuario')
+    }
   }
 
   // Get user preferences.
@@ -57,6 +55,22 @@ function AuthProvider({ children }) {
     } else {
       throw new Error('No existe documento del usuario.')
     }
+  }
+
+  // Set user preferences.
+  const setFavoriteComic = async (uid, newFavoriteComic) => {
+    const userDocument = doc(db, 'Users', uid)
+    const snapPreferences = (await getDoc(userDocument)).data().preferences
+    const preferences = JSON.parse(snapPreferences)
+    preferences.favoriteComics.push(newFavoriteComic)
+
+    await updateDoc(userDocument, {
+      preferences: JSON.stringify(preferences),
+    })
+    const userStorage = JSON.parse(window.sessionStorage.getItem('user'))
+    const newData = { ...userStorage, ...preferences }
+    setLoggedUser(newData)
+    window.sessionStorage.setItem('user', JSON.stringify(newData))
   }
 
   const keepLoged = () => {
@@ -77,7 +91,7 @@ function AuthProvider({ children }) {
     navigate('/')
   }
 
-  const authUser = { loggedUser, signUpUser, loginUser, keepLoged, logoutUser }
+  const authUser = { loggedUser, signUpUser, loginUser, keepLoged, logoutUser, setFavoriteComic }
 
   return <AuthContext.Provider value={authUser}>{children}</AuthContext.Provider>
 }

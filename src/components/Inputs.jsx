@@ -25,7 +25,7 @@ function Input(props) {
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   id: PropTypes.string.isRequired,
   value: PropTypes.string,
   placeholder: PropTypes.string.isRequired,

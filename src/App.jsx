@@ -6,6 +6,8 @@ import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
 import { Home } from './pages/Home'
 import { PageNotFound } from './pages/PageNotFound'
+import { Comics } from './components/Comics'
+import { ComicList } from './components/ComicList'
 
 function App() {
   return (
@@ -26,10 +28,23 @@ function App() {
               path='/home'
               element={
                 // <IsLogged>
-                <Home />
+                <Home>
+                  <Comics />
+                </Home>
                 // </IsLogged>
               }
             />
+            <Route
+              path='/favorites'
+              element={
+                // <IsLogged>
+                <Home>
+                  <ComicList />
+                </Home>
+                // </IsLogged>
+              }
+            />
+
             <Route path='/*' element={<PageNotFound />} />
           </Routes>
         </AuthProvider>

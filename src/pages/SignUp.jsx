@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../services/firebase/auth'
 import { Input } from '../components/Inputs'
-import { number } from 'prop-types'
 
 function SignUp() {
   const [nickname, setNickname] = useState('')
@@ -28,11 +27,7 @@ function SignUp() {
       className='flex flex-col justify-center mx-auto py-8 min-h-screen w-4/5 sm:w-1/2 md:w-2/5 xl:w-1/5'
     >
       <h1 className='text-center mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white'>
-        <img
-          src='/public/Marvel_Comics_(2000).svg'
-          alt='Marvel logo'
-          className='justify-center mx-auto w-2/4 rounded m-4'
-        />
+        <img src='/Marvel_Comics_(2000).svg' alt='Marvel logo' className='justify-center mx-auto w-2/4 rounded m-4' />
         Comics
       </h1>
       <div className='mb-2'>
@@ -50,7 +45,7 @@ function SignUp() {
         <Input
           type='number'
           id='id'
-          value={number}
+          value={idNumber}
           placeholder='12345'
           required
           label='Numero de identificacion*'
