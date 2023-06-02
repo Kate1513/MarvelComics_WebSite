@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../services/firebase/auth'
 import { Input } from '../components/Inputs'
 import { Alert, Warning } from '../components/Messages'
+import { ButtonBack } from '../components/Buttons'
 
 function SignUp() {
   const [nickname, setNickname] = useState('')
@@ -40,7 +41,7 @@ function SignUp() {
   return (
     <form
       onSubmit={createUser}
-      className='flex flex-col justify-center mx-auto py-8 min-h-screen w-4/5 sm:w-1/2 md:w-2/5 xl:w-1/5'
+      className='flex flex-col justify-center mx-auto py-8 min-h-screen w-4/5 sm:w-1/2 md:w-2/5 xl:w-1/5 '
     >
       <h1 className='text-center mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white'>
         <img src='/Marvel_Comics_(2000).svg' alt='Marvel logo' className='justify-center mx-auto w-2/4 rounded m-4' />
@@ -94,14 +95,12 @@ function SignUp() {
       </div>
       <button
         type='submit'
-        className='text-white mt-4 bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+        className='text-md text-white mt-4 bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
       >
         Registrarme
       </button>
-      <div className='text-right mt-4 text-sm font-medium text-gray-900 dark:text-white'>
-        <a onClick={goLogin} className='cursor-pointer text-blue-600 hover:underline dark:text-blue-500'>
-          Volver
-        </a>
+      <div className='text-right mt-4 text-md font-medium text-gray-900 dark:text-white'>
+        <ButtonBack onClose={goLogin}>Volver</ButtonBack>
       </div>
     </form>
   )

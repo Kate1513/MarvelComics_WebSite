@@ -12,7 +12,7 @@ const IsLogged = (props) => {
   return props.children
 }
 
-// Si el usuario no tiene sesion iniciada puede acceder
+// Si el usuario tiene sesion iniciada puede acceder
 const IsNotLogged = (props) => {
   const auth = useAuth()
   if (auth.loggedUser) {

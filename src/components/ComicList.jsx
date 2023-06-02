@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { ButtonBack } from './Buttons'
 
 function ComicList() {
   const [comics, setComics] = useState([])
@@ -72,16 +73,13 @@ function ComicList() {
               ))}
             </ul>
           ) : (
-            <p>No tienes comics favoritos aun</p>
+            <h1 className='text-center text-2xl p-10'>¡No tienes comics favoritos aún!</h1>
           )}
         </div>
       )}
       {showDetails ? (
-        <div>
-          <a
-            id='comicModal'
-            className='flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700'
-          >
+        <section className='flex flex-col justify-center mx-auto mt-4 sm:my-14 md:my-20 w-[300px] lg:w-[400px] xl:w-[500px]'>
+          <a className='flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700'>
             <img
               className='object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg'
               src={comic.image_Comic}
@@ -95,9 +93,11 @@ function ComicList() {
             </div>
 
             <div className='flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600'></div>
-            <button onClick={closeDetails}>volver</button>
           </a>
-        </div>
+          <div>
+            <ButtonBack onClose={closeDetails}>Volver</ButtonBack>
+          </div>
+        </section>
       ) : null}
     </>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../services/firebase/auth'
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline'
 import { PropTypes } from 'prop-types'
 
 function NavbarTop(props) {
@@ -19,8 +20,9 @@ function NavbarTop(props) {
           </span>
         </div>
         <div className='flex items-center'>
-          <a onClick={handleLogout} className='text-sm text-blue-600 dark:text-blue-500 hover:underline'>
+          <a onClick={handleLogout} className='flex text-lg text-blue-600 dark:text-blue-500 hover:underline'>
             Cerrar sesión
+            <ArrowRightOnRectangleIcon className='h-6 w-6 text-gray-500' />
           </a>
         </div>
       </section>
@@ -35,7 +37,7 @@ function NavbarBottom() {
     navigate('/favorites')
   }
   return (
-    <nav className='bg-gray-50 dark:bg-gray-700'>
+    <nav className='bg-gray-500 bg-opacity-20'>
       <div className='max-w-screen-xl px-4 py-3 mx-auto'>
         <div className='flex items-center justify-center'>
           <ul className='flex flex-row justify-center font-medium mt-0 mr-6 space-x-8 text-sm'>

@@ -2,13 +2,19 @@
 
 **Marvel Comics**
 
-[TOCM]
+## Índice
 
-# Información general del proyecto
+- [1. Información general del proyecto](#1-información)
+- [2. Manual de instrucciónes](#2-manual_de_instrucciónes)
+- [3. Requerimientos](#3-requerimientos)
+- [4. Patrón de arquitectura](#4-patrón_de_arquitectura)
+- [5. Tecnologías implementadas](#5-tecnologías_implementadas)
 
-[========]
+# 1. Información general del proyecto
 
-# Manual de instalación
+Sitio web sobre comics de Marvel, donde puedes ver información general algunos comics y añadirlos a una lista de favoritos.
+
+# 2. Manual de instrucciones
 
 Este manual te explica cómo acceder al contenido de la página principal, donde podrás ver los cómics que te gustan. Solo tienes que seguir estos pasos:
 
@@ -25,7 +31,9 @@ Este manual te explica cómo acceder al contenido de la página principal, donde
 
 - Detalles y favoritos: Si haces clic en la imagen de algún cómic, podrás ver más detalles sobre él y si haces clic en el corazón lo agregarás a la sección de favoritos.
 
-## Requerimientos
+# 3. Requerimientos
+
+Los requerimientos para la correcta visualizacion del sitio web son:
 
 - Dispositivo tecnologico (Telefono, tablet, computador).
 - Conexion a internet.
@@ -33,17 +41,9 @@ Este manual te explica cómo acceder al contenido de la página principal, donde
 - El navegador debe ser compatible con las tecnologías web utilizadas en el sitio (En versiones de navegador antiguas pueden fallar elementos).
 - Creacion de cuenta e inicio de sesion para poder acceder a la informacion de los comics de Marvel.
 
-[========]
-
-# Patrón de arquitectura
+# 4. Patrón de arquitectura
 
 Patron seleccionado: Arquitectura de capas.
-
-La elección de la arquitectura de capas para este proyecto se basa en su adecuación a las necesidades específicas del desarrollo web que se está realizando. Dado que el proyecto no presenta una complejidad excesiva en términos de backend o bases de datos, la arquitectura de capas proporciona una estructura organizada y escalable sin agregar complejidad innecesaria.
-
-La arquitectura de capas permite separar claramente las diferentes responsabilidades y funcionalidades del proyecto en capas distintas. Esto ofrece beneficios como una mejor organización del código y mantenimiento más sencillo. Además, promueve la reutilización de componentes y módulos, lo cual resulta útil en proyectos de cualquier tamaño.
-
-Tambien se garantiza una estructura modular y coherente que facilita el desarrollo y evolución del proyecto a lo largo del tiempo. También se brinda flexibilidad para agregar nuevas funcionalidades en el futuro, ya que cada capa puede modificarse de forma independiente sin afectar al resto del sistema.
 
 El patrón de arquitectura en capas es una forma de organizar el código de una aplicación en diferentes niveles de abstracción, separando las responsabilidades y facilitando el mantenimiento y la escalabilidad. Para un proyecto React API Firebase, este patrón ofrece varias ventajas, como:
 
@@ -54,7 +54,34 @@ El patrón de arquitectura en capas es una forma de organizar el código de una 
 
 Por estas razones, he elegido el patrón de arquitectura en capas para el proyecto, siguiendo las buenas prácticas y los principios de diseño apropiados.
 
-# Tecnologías implementadas
+Como parte de esta decision, he buscado las diferentes estructuras del los archivos del proyecto segun el patron de arquitectura (Arquitectura de capas, Modelo-Vista-Controlador (MVC), Modelo-Vista-Presentador (MVP)...), siendo la mas apropiada para un proyecto de React y Firebase la Arquitectura de capas, siendo esta la estructura base del proyecto:
+
+my-app/
+├── public/
+├── src/
+│ ├── components/
+│ │ ├── common/ (Componentes reutilizables)
+│ │ ├── pages/ (Componentes de páginas específicas)
+│ │ ├── shared/ (Componentes compartidos entre páginas)
+│ │ └── App.js (Componente raíz de la aplicación)
+│ ├── services/
+│ │ ├── api/ (Servicios relacionados con la API)
+│ │ └── firebase/ (Servicios relacionados con Firebase)
+│ ├── utils/ (Utilidades y funciones auxiliares)
+│ ├── assets/ (Archivos estáticos, como imágenes)
+│ ├── constants/ (Constantes y configuraciones)
+│ ├── hooks/ (Hooks personalizados)
+│ ├── store/ (Configuración del almacenamiento global, si se utiliza Redux)
+│ ├── styles/ (Estilos globales y variables)
+│ ├── App.js (Punto de entrada principal de la aplicación)
+│ └── index.js (Archivo principal de configuración de React)
+├── .env (Variables de entorno)
+├── .gitignore
+├── package.json
+├── README.md
+└── yarn.lock
+
+# 5. Tecnologías implementadas
 
 - HTML
 - CSS

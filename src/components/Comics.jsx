@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { apiComics } from '../services/API/api'
 import { useAuth } from '../services/firebase/auth'
 import { Loading } from './Loading'
-import { HeartIcon } from '@heroicons/react/24/outline'
+import { PlusSmallIcon } from '@heroicons/react/24/outline'
 import { ButtonBack } from './Buttons'
 
 function Comics() {
@@ -10,11 +10,6 @@ function Comics() {
   const [comics, setComics] = useState(null)
   const [comic, setComic] = useState(null)
   const [showDetails, setShowDetails] = useState(false)
-
-  const handleFavorite = (comic) => {
-    const uid = auth.loggedUser.user.uid
-    auth.setFavoriteComic(uid, comic)
-  }
 
   useEffect(() => {
     async function fetchData() {
@@ -24,6 +19,11 @@ function Comics() {
     }
     fetchData()
   }, [])
+
+  const handleFavorite = (comic) => {
+    const uid = auth.loggedUser.user.uid
+    auth.setFavoriteComic(uid, comic)
+  }
 
   const closeDetails = () => {
     setShowDetails(false)
@@ -75,12 +75,15 @@ function Comics() {
                     </a>
                     <div className='flex p-2 justify-between h-auto cursor-pointer'>
                       <a>
-                        <h5 className='mb-2 p-1 text-sm font-bold tracking-tight text-gray-900 dark:text-white hover:text-red-500'>
+                        <h5 className='mb-2 p-1 text-md tracking-tight text-gray-900 dark:text-white hover:text-red-500'>
                           {comic.title}
                         </h5>
                       </a>
                       <div>
-                        <HeartIcon onClick={() => handleFavorite(comic)} className='h-8 w-8 text-gray-500' />
+                        <PlusSmallIcon
+                          onClick={() => handleFavorite(comic)}
+                          className='h-8 w-8 text-white bg-sky-800 rounded-lg'
+                        />
                       </div>
                     </div>
                   </div>

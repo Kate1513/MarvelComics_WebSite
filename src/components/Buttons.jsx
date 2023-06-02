@@ -4,9 +4,9 @@ import { PropTypes } from 'prop-types'
 
 function ButtonBack({ onClose, children }) {
   return (
-    <div className='flex justify-end m-4'>
-      <button onClick={onClose} className='flex'>
-        <ArrowLongLeftIcon className='h-6 w-6 text-gray-500' />
+    <div className='flex justify-end m-2'>
+      <button onClick={onClose} className='flex cursor-pointer text-blue-600 hover:underline dark:text-blue-500'>
+        <ArrowLongLeftIcon className='h-6 w-6 text-blue-500' />
         {children}
       </button>
     </div>
