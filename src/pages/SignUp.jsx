@@ -2,23 +2,39 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../services/firebase/auth'
 import { Input } from '../components/Inputs'
+import { Alert, Warning } from '../components/Messages'
 
 function SignUp() {
   const [nickname, setNickname] = useState('')
   const [idNumber, setIdNumber] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [warning, setWarning] = useState('')
+  const [error, setError] = useState('')
 
   const navigate = useNavigate()
   const auth = useAuth()
 
   const createUser = (e) => {
     e.preventDefault()
-    auth.signUpUser(email, password, nickname, idNumber)
+    auth.signUpUser(email, password, nickname, idNumber).catch(() => {
+      setError('Correo invalido')
+    })
   }
 
   const goLogin = () => {
     navigate('/')
+  }
+
+  const handlePassword = (e) => {
+    const value = e.target.value
+    setPassword(value)
+
+    if (value.length >= 6) {
+      setWarning('')
+    } else {
+      setWarning('La contraseña debe tener al menos 6 caracteres.')
+    }
   }
 
   return (
@@ -62,6 +78,7 @@ function SignUp() {
           label='Email*'
           onChange={(e) => setEmail(e.target.value)}
         />
+        {error && <Alert>{error}</Alert>}
       </div>
       <div className='mb-2'>
         <Input
@@ -71,8 +88,9 @@ function SignUp() {
           placeholder='••••••••'
           required
           label='Contraseña*'
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePassword}
         />
+        {warning && <Warning>{warning}</Warning>}
       </div>
       <button
         type='submit'

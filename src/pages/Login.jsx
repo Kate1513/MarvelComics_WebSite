@@ -2,17 +2,21 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../services/firebase/auth'
 import { Input } from '../components/Inputs'
+import { Alert } from '../components/Messages'
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const navigate = useNavigate()
   const auth = useAuth()
 
   const login = (e) => {
     e.preventDefault()
-    auth.loginUser(email, password)
+    auth.loginUser(email, password).catch(() => {
+      setError('Credenciales incorrectas')
+    })
   }
 
   const goSignUp = () => {
@@ -55,6 +59,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              {error && <Alert>{error}</Alert>}
               <button
                 type='submit'
                 className='block mx-auto w-full px-5 py-3 text-base font-medium text-center text-white bg-black rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'

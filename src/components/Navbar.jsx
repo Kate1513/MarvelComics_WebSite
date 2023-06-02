@@ -1,5 +1,4 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { PropTypes } from 'prop-types'
 
@@ -28,6 +27,7 @@ function NavbarBottom() {
 
   const home = () => {
     navigate('/home')
+    location.reload()
   }
   const favorites = () => {
     navigate('/favorites')

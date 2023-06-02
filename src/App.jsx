@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './services/firebase/auth'
-// import { IsLogged, IsNotLogged } from './Routes'
+import { IsLogged, IsNotLogged } from './Routes'
 import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
 import { Home } from './pages/Home'
@@ -18,30 +18,30 @@ function App() {
             <Route
               path='/'
               element={
-                // <IsNotLogged>
-                <Login />
-                // </IsNotLogged>
+                <IsNotLogged>
+                  <Login />
+                </IsNotLogged>
               }
             />
             <Route path='/signup' element={<SignUp />} />
             <Route
               path='/home'
               element={
-                // <IsLogged>
-                <Home>
-                  <Comics />
-                </Home>
-                // </IsLogged>
+                <IsLogged>
+                  <Home>
+                    <Comics />
+                  </Home>
+                </IsLogged>
               }
             />
             <Route
               path='/favorites'
               element={
-                // <IsLogged>
-                <Home>
-                  <ComicList />
-                </Home>
-                // </IsLogged>
+                <IsLogged>
+                  <Home>
+                    <ComicList />
+                  </Home>
+                </IsLogged>
               }
             />
 

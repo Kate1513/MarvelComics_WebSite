@@ -4,7 +4,7 @@ import { useAuth } from './services/firebase/auth'
 import { PropTypes } from 'prop-types'
 
 // Si el usuario no tiene sesion iniciada debe volver al inicio de sesion
-const IsNotLogged = (props) => {
+const IsLogged = (props) => {
   const auth = useAuth()
   if (!auth.loggedUser) {
     return <Navigate to='/' />
@@ -13,7 +13,7 @@ const IsNotLogged = (props) => {
 }
 
 // Si el usuario no tiene sesion iniciada puede acceder
-const IsLogged = (props) => {
+const IsNotLogged = (props) => {
   const auth = useAuth()
   if (auth.loggedUser) {
     return <Navigate to='/home' />

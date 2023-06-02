@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { auth, db } from './firebase'
@@ -10,6 +10,13 @@ const AuthContext = React.createContext()
 function AuthProvider({ children }) {
   const navigate = useNavigate()
   const [loggedUser, setLoggedUser] = React.useState(null)
+
+  useEffect(() => {
+    if (window.sessionStorage.length > 0) {
+      const userStorage = window.sessionStorage.getItem('user')
+      setLoggedUser(JSON.parse(userStorage))
+    }
+  }, [])
 
   // Create user with email and password
   const signUpUser = async (email, password, nickname, idNumber) => {
@@ -40,7 +47,6 @@ function AuthProvider({ children }) {
       const data = { ...userCredential, ...userData }
       setLoggedUser(data)
       window.sessionStorage.setItem('user', JSON.stringify(data))
-      navigate('/home')
     } catch {
       throw new Error('No existe el usuario')
     }
@@ -69,6 +75,7 @@ function AuthProvider({ children }) {
     })
     const userStorage = JSON.parse(window.sessionStorage.getItem('user'))
     const newData = { ...userStorage, ...preferences }
+    console.log(newData)
     setLoggedUser(newData)
     window.sessionStorage.setItem('user', JSON.stringify(newData))
   }
