@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { apiComics } from '../services/API/api'
-import { HeartIcon } from '@heroicons/react/24/outline'
-import { Loading } from './Loading'
 import { useAuth } from '../services/firebase/auth'
+import { Loading } from './Loading'
+import { HeartIcon } from '@heroicons/react/24/outline'
+import { ButtonBack } from './Buttons'
 
 function Comics() {
   const auth = useAuth()
@@ -50,7 +51,7 @@ function Comics() {
   return (
     <>
       {showDetails ? null : (
-        <div className='flex justify-between :mx-auto sm:ml-10 sm:mr-10 md:ml-20 md:mr-20'>
+        <div className='flex justify-between :mx-auto mt-4 sm:ml-10 sm:mr-10 md:ml-20 md:mr-20'>
           {comics ? (
             <ul className='flex flex-wrap justify-center'>
               {comics.data.results.map((comic) => (
@@ -93,27 +94,31 @@ function Comics() {
       )}
 
       {showDetails ? (
-        <div>
-          <a
-            id='comicModal'
-            className='flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700'
-          >
-            <img
-              className='object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg'
-              src={comic.image_Comic}
-              alt='Comic image'
-            />
-            <div className='flex flex-col justify-between p-4 leading-normal'>
-              <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
-                Titulo:{comic.title_Comic}
-              </h5>
-              <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>{comic.description_Comic}</p>
-            </div>
+        <section className='flex justify-center mx-auto mt-4 sm:my-14 md:my-20 w-[300px] lg:w-[400px] xl:w-[500px]'>
+          <div className='flex flex-col'>
+            <a
+              id='comicModal'
+              className='flex flex-col mx-auto items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700'
+            >
+              <img
+                className='object-cover w-full rounded-t-lg h-64 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg'
+                src={comic.image_Comic}
+                alt='Comic image'
+              />
+              <div className='flex flex-col justify-between p-4 leading-normal'>
+                <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
+                  Titulo:{comic.title_Comic}
+                </h5>
+                <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>{comic.description_Comic}</p>
+              </div>
 
-            <div className='flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600'></div>
-            <button onClick={closeDetails}>volver</button>
-          </a>
-        </div>
+              <div className='flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600'></div>
+            </a>
+            <div>
+              <ButtonBack onClose={closeDetails}>Volver</ButtonBack>
+            </div>
+          </div>
+        </section>
       ) : null}
     </>
   )

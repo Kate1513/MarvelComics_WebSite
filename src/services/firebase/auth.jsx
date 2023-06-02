@@ -22,9 +22,8 @@ function AuthProvider({ children }) {
   const signUpUser = async (email, password, nickname, idNumber) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-      setLoggedUser(userCredential)
       registerDocUser(userCredential.user.uid, nickname, idNumber)
-      navigate('/home')
+      navigate('/')
     } catch {
       throw new Error()
     }
@@ -74,10 +73,9 @@ function AuthProvider({ children }) {
       preferences: JSON.stringify(preferences),
     })
     const userStorage = JSON.parse(window.sessionStorage.getItem('user'))
-    const newData = { ...userStorage, ...preferences }
-    console.log(newData)
-    setLoggedUser(newData)
-    window.sessionStorage.setItem('user', JSON.stringify(newData))
+    userStorage.preferences = JSON.stringify(preferences)
+    setLoggedUser(userStorage)
+    window.sessionStorage.setItem('user', JSON.stringify(userStorage))
   }
 
   const keepLoged = () => {
@@ -92,10 +90,9 @@ function AuthProvider({ children }) {
 
   // LogOut User
   const logoutUser = () => {
-    signOut(auth)
-    setLoggedUser(null)
     window.sessionStorage.clear()
-    navigate('/')
+    setLoggedUser(null)
+    signOut(auth)
   }
 
   const authUser = { loggedUser, signUpUser, loginUser, keepLoged, logoutUser, setFavoriteComic }

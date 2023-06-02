@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { HeartIcon } from '@heroicons/react/24/outline'
-import { Loading } from './Loading'
-import { useAuth } from '../services/firebase/auth'
 
 function ComicList() {
-  const auth = useAuth()
-
-  const [comics, setComics] = useState(null)
+  const [comics, setComics] = useState([])
   const [comic, setComic] = useState(null)
   const [showDetails, setShowDetails] = useState(false)
-
-  const handleFavorite = (comic) => {
-    const uid = auth.loggedUser.user.uid
-    auth.setFavoriteComic(uid, comic)
-  }
 
   useEffect(() => {
     const storedData = sessionStorage.getItem('user')
@@ -47,10 +37,9 @@ function ComicList() {
 
   return (
     <>
-      o
       {showDetails ? null : (
-        <div className='flex justify-between :mx-auto sm:ml-10 sm:mr-10 md:ml-20 md:mr-20'>
-          {comics ? (
+        <div className='flex justify-center mx-auto mt-4 sm:my-14 md:my-4'>
+          {comics.length > 0 ? (
             <ul className='flex flex-wrap justify-center'>
               {comics.map((comic) => (
                 <li key={comic.id} className='m-4 w-[160px] lg:w-[190px] xl:w-[220px]'>
@@ -77,16 +66,13 @@ function ComicList() {
                           {comic.title}
                         </h5>
                       </a>
-                      <div>
-                        <HeartIcon onClick={() => handleFavorite(comic)} className='h-8 w-8 text-gray-500' />
-                      </div>
                     </div>
                   </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <Loading />
+            <p>No tienes comics favoritos aun</p>
           )}
         </div>
       )}
