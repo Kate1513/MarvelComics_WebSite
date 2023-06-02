@@ -56,30 +56,7 @@ Por estas razones, he elegido el patrón de arquitectura en capas para el proyec
 
 Como parte de esta decision, he buscado las diferentes estructuras del los archivos del proyecto segun el patron de arquitectura (Arquitectura de capas, Modelo-Vista-Controlador (MVC), Modelo-Vista-Presentador (MVP)...), siendo la mas apropiada para un proyecto de React y Firebase la Arquitectura de capas, siendo esta la estructura base del proyecto:
 
-my-app/
-├── public/
-├── src/
-│ ├── components/
-│ │ ├── common/ (Componentes reutilizables)
-│ │ ├── pages/ (Componentes de páginas específicas)
-│ │ ├── shared/ (Componentes compartidos entre páginas)
-│ │ └── App.js (Componente raíz de la aplicación)
-│ ├── services/
-│ │ ├── api/ (Servicios relacionados con la API)
-│ │ └── firebase/ (Servicios relacionados con Firebase)
-│ ├── utils/ (Utilidades y funciones auxiliares)
-│ ├── assets/ (Archivos estáticos, como imágenes)
-│ ├── constants/ (Constantes y configuraciones)
-│ ├── hooks/ (Hooks personalizados)
-│ ├── store/ (Configuración del almacenamiento global, si se utiliza Redux)
-│ ├── styles/ (Estilos globales y variables)
-│ ├── App.js (Punto de entrada principal de la aplicación)
-│ └── index.js (Archivo principal de configuración de React)
-├── .env (Variables de entorno)
-├── .gitignore
-├── package.json
-├── README.md
-└── yarn.lock
+![Estructura de archivos base](./public/Estructura_archivos.jpg)
 
 # 5. Tecnologías implementadas
 
